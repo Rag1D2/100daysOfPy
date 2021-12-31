@@ -28,6 +28,8 @@ scissors = '''
       (____)
 ---.__(___)
 '''
+
+game_art = [rock, paper, scissors]
 ################################################################
 
 # GAME LOGIC
@@ -37,24 +39,20 @@ weapon = ["Rock", "Paper", "Scissors"]
 
 comp_choice = weapon[comp_number]
 
-player_choice = weapon[int(input(
-    "Welcome to Rock, Paper, Scissors.\n Please Select a Choice: 0 for Rock, 1 for Paper or 2 for Scissors "))]
+player_number = int(input(
+    "Welcome to Rock, Paper, Scissors.\n Please Select a Choice: 0 for Rock, 1 for Paper or 2 for Scissors "))
+
+player_choice = weapon[player_number]
 
 # Player Choice
-if player_choice == weapon[0]:
-    print(f"Player Chose: Rock\n{rock}")
-elif player_choice == weapon[1]:
-    print(f"Player Chose: Paper\n{paper}")
-elif player_choice == weapon[2]:
-    print(f"Player Chose: Scissors\n{scissors}")
+if player_choice == weapon[player_number]:
+    print(f"Player Chose: {weapon[player_number]}\n{game_art[player_number]}")
+
 
 # Computer Choice
-if comp_choice == weapon[0]:
-    print(f"Computer Chose: Rock\n{rock}")
-elif comp_choice == weapon[1]:
-    print(f"Computer Chose: Paper\n{paper}")
-elif comp_choice == weapon[2]:
-    print(f"Computer Chose: Scissors\n{scissors}")
+if comp_choice == weapon[comp_number]:
+    print(f"Computer Chose: {weapon[comp_number]}\n{game_art[comp_number]}")
+
 
 # Game Conditions
 if player_choice == comp_choice:

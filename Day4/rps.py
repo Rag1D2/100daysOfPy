@@ -1,6 +1,6 @@
 # My solution to the RPS code challenge
 
-# Randomisation and Python Lists
+# Randomization and Python Lists
 import random
 
 # Game Art
