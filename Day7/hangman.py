@@ -1,30 +1,119 @@
 # Produce a Hangman game
+
+# import modules
 import random
+
+# ASCII ART
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+logo = ''' 
+ _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                    __/ |                      
+                   |___/    '''
+
+lives = 6
+
+print(f"WELCOME TO \n {logo}")
 # 1. generate a random word
-random_words = ["python", "microsoft", "apple",
-                "android", "computer", "keyboard", ]
-chosen_word = list(random.choice(random_words))
-print(chosen_word)
+word_list = ["python", "microsoft", "mouse",
+             "android", "computer", "keyboard"]
+chosen_word = random.choice(word_list)
 
 # 2. Generate all letters in word as blank spaces
-# for letter in chosen_word:
+display = []
+word_length = len(chosen_word)
 
-# 3. Ask user to guess a letter
-# 4. Check if guessed letter is in the word
-# 4a. If yes, replace blank space with letter
-# (1). Are all blanks filled?
-# (1a) If yes, player wins! Game Over!
-# (1b) If no, return to step 3.
-# 4b. If no, player loses a life
-# (1) Are all lives gone?
-# (1a) If yes, player loses! Game Over!
-# (1b) If no, return to step 3.
+for letter in chosen_word:
+    display += "_"
+print(display)
 
-# Input asking for a guess (letter)
-#guess = input("Guess a letter ")
+# Initialize game
+end_of_game = False
 
-# Check letters in random word to see if they match
-# If guessed letter is in game word, letter appears on screen in proper place
-# If letter is not in game word, a step in the hangman picture is added
-# Player wins if they guess all letters in the game word before hangman is complete
-# Player loses if hangman is complete before all letters in game word are guessed
+while end_of_game == False:
+    # 3. Ask user to guess a letter
+    guess = input("Guess a letter: ").lower()
+    # 4. Check if guessed letter is in the chosen_word
+    for position in range(word_length):
+        letter = chosen_word[position]
+        # 4a. If yes, replace blank space with letter
+        if guess == letter:
+            print("Correct!")
+            display[position] = letter
+            print(display)
+    # 4b. If no, player loses a life
+    if guess not in chosen_word:
+        lives -= 1
+        print(f"WRONG!\n You have {lives} chances left")
+        print(stages[lives])
+        print(display)
+        # (1) Are all lives gone?
+        if lives == 0:
+            # (1a) If yes, player loses! Game Over!
+            end_of_game = True
+            print("YOU LOSE! Sorry to leave you hanging!")
+
+    # (1). Are all blanks filled?
+    if "_" not in display:
+        # (1a) If yes, player wins! Game Over!
+        end_of_game = True
+        print("YOU WIN!")
